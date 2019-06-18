@@ -5,17 +5,23 @@
     <title>Main page</title>
 </head>
 <body>
+
 <h2>Messages</h2>
 <form method="post" action="/add_message">
     <input type="text" name="text">
     <input type="text" name="tag">
     <button type="submit">Add message</button>
 </form>
+
 <h3>Messages</h3>                                               <!-- Вызываем request (POST), передаем в кортеж.
                                                                 Обращаемся к кортежу, достаем элементы, которые
                                                                 Следом выводятся через цикл -->
 {% for message in messages %}
-<div><i>{{ message.text }}&nbsp;</i><b>#s{{ message.tag }}</b></div>
+<div><i>{{ message.text }}&nbsp;</i>
+    {% for tag in message.tags %}
+        <b>#{{ tag.text }}</b>
+    {% endfor %}
+</div>
 {% endfor %}
 </body>
 </html>
